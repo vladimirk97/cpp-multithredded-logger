@@ -1,11 +1,19 @@
-cmake_minimum_required(VERSION 3.22.1)
+cmake_minimum_required(VERSION 3.22.1...3.30.2)
 
-project(multithreded_logger)
+set(PROJECT multithreded_logger)
 
-add_executable(${PROJECT_NAME}
-    main.cpp
+project(${PROJECT} 
+    VERSION 0.0.1
+    DESCRIPTION "Multithreded logger"
+    LANGUAGES CXX
 )
 
-target_include_directories(${PROJECT_NAME}
-    PUBLIC inc
-)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+include(cmake/UpdateSubmodules.cmake)
+
+include(CTest)
+
+add_subdirectory(external)
+add_subdirectory(multithreded_logger)
