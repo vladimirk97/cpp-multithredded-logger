@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.22.1...3.30.2)
 
-set(PROJECT multithreded_logger)
+set(PROJECT multithreaded_logger)
 
 project(${PROJECT} 
     VERSION 0.0.1
-    DESCRIPTION "Multithreded logger"
+    DESCRIPTION "Multithreaded logger"
     LANGUAGES CXX
 )
 
@@ -16,4 +16,4 @@ include(cmake/UpdateSubmodules.cmake)
 include(CTest)
 
 add_subdirectory(external)
-add_subdirectory(multithreded_logger)
+add_subdirectory(multithreaded_logger)
