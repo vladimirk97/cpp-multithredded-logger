@@ -17,3 +17,5 @@ include(CTest)
 
 add_subdirectory(external)
 add_subdirectory(multithreaded_logger)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE thread_safe_queue)

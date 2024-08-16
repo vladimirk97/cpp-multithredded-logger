@@ -31,26 +31,10 @@ namespace MTLogger {
         {LogLevel::FATAL, " [FATAL] "},
     };
 
-    inline std::string timestamp() {
-        //get the time
-        std::chrono::system_clock::time_point tp = std::chrono::system_clock::now();
-        std::time_t tt = std::chrono::system_clock::to_time_t(tp);
-        std::tm gmt{}; gmtime_r(&tt, &gmt);
-        std::chrono::duration<double> fractional_seconds =
-        (tp - std::chrono::system_clock::from_time_t(tt)) + std::chrono::seconds(gmt.tm_sec);
-        //format the string
-        std::string buffer("year/mo/dy hr:mn:sc.xxxxxx0");
-        snprintf(&buffer.front(), buffer.length(), "%04d/%02d/%02d %02d:%02d:%09.6f",
-                gmt.tm_year + 1900, gmt.tm_mon + 1, gmt.tm_mday, gmt.tm_hour, gmt.tm_min,
-                fractional_seconds.count());
-        //remove trailing null terminator added by snprintf
-        buffer.pop_back();
-        return buffer;
-    }
-
     class Logger {
       private:
-        TSQueue<std::string> m_ts_queue;
+        TSQ::ThreadSafeQueue<std::string> m_ts_queue;
+        // TSQueue<std::string> m_ts_queue;
         std::thread m_receiver_thread;
         std::atomic<bool> m_shut_down;
 
@@ -102,7 +86,7 @@ namespace MTLogger {
     
     Logger::~Logger() {
         m_shut_down.store(true);
-        m_ts_queue.shutdown();
+        m_ts_queue.shutdown(true);
         m_receiver_thread.join(); 
     }
     
@@ -116,9 +100,10 @@ namespace MTLogger {
 
     void Logger::receiver(void) {
         while(!m_shut_down.load() || !m_ts_queue.empty()) {
-            std::unique_ptr<std::string> data = m_ts_queue.pop();
-            if(data) {
-                m_file << *data << "\n";
+            std::string data; 
+            bool status = m_ts_queue.pop(data);
+            if(status) {
+                m_file << data << "\n";
                 m_file.flush();
             }
         }
