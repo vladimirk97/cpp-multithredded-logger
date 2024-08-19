@@ -5,10 +5,15 @@
 
 #include <string>
 
+namespace MTLogger
+{
+
 typedef struct _LogRecord
 {
     LogLevel::Level severity_level;
     std::string record;
 } LogRecord;
+
+} // namespace MTLogger
 
 #endif // UTILS_RECORD_H_

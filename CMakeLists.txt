@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.22.1...3.30.2)
 
-set(PROJECT multithreaded_logger)
-
-project(${PROJECT} 
+project(multithreaded_logger
     VERSION 0.0.1
     DESCRIPTION "Multithreaded logger"
     LANGUAGES CXX
@@ -85,7 +83,7 @@ install(TARGETS ${PROJECT_NAME}
     #LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} # lib
     #ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} # lib
     # except for public headers, as we want them to be inside a library folder
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME} # include/SomeProject
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME} # include/ProjectName
     INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} # include
 )
 

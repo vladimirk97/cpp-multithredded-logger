@@ -5,10 +5,13 @@
 
 #include <string>
 
+namespace MTLogger
+{
 class LogWriter
 {
   public:  
     virtual bool write_log(LogLevel::Level severity_level, std::string record) = 0;
 };
+}
 
 #endif

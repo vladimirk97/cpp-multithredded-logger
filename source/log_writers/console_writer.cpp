@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-bool ConsoleWriter::write_log(LogLevel::Level severity_level, std::string record)
+bool MTLogger::ConsoleWriter::write_log(LogLevel::Level severity_level, std::string record)
 {
     std::cout << timestamp() << LogLevel::get_level(severity_level) << record << std::endl;
     return true;

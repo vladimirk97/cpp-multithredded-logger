@@ -6,7 +6,7 @@
 
 TEST(ConsoleWriter, WriteToOutput)
 {
-    std::unique_ptr<LogWriter> writer = std::make_unique<ConsoleWriter>();
+    std::unique_ptr<MTLogger::LogWriter> writer = std::make_unique<MTLogger::ConsoleWriter>();
     
-    writer->write_log(LogLevel::Level::INFO, "Test");
+    writer->write_log(MTLogger::LogLevel::Level::INFO, "Test");
 }

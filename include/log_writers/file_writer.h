@@ -5,6 +5,8 @@
 
 #include <fstream>
 
+namespace MTLogger
+{
 class FileWriter: public LogWriter
 {
   public:
@@ -17,5 +19,6 @@ class FileWriter: public LogWriter
     std::ofstream m_file;
 
 };
+}
 
 #endif // LOG_WRITERS_CONSOLE_WRITER_H_
